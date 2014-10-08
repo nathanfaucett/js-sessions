@@ -1,0 +1,28 @@
+{
+  "name": "sessions",
+  "version": "0.0.1",
+  "description": "sessions middleware",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathanfaucett/sessions.git"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "sessions",
+    "sessions.js"
+  ],
+  "author": "Nathan Faucett",
+  "license": "BSD-2-Clause",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jsbeautifier": ""
+  },
+  "dependencies": {
+    "type": "nathanfaucett/type",
+    "context": "nathanfaucett/context",
+    "http_error": "nathanfaucett/http_error"
+  }
+}
+
