@@ -1,4 +1,6 @@
-var type = require("type"),
+var isString = require("is_string"),
+    isObject = require("is_object"),
+    isFunction = require("is_function"),
     context = require("context"),
     crypto = require('crypto');
 
@@ -9,10 +11,10 @@ var MemoryStore = require("./memory_store");
 function Sessions(opts) {
     opts || (opts = {});
 
-    this.name = type.isString(opts.name) ? opts.name : "sid";
-    this.store = type.isObject(opts.store) ? opts.store : new MemoryStore();
-    this.secret = type.isString(opts.secret) ? opts.secret : "sessions";
-    this.generateID = type.isFunction(opts.generateID) ? opts.generateID : uid;
+    this.name = isString(opts.name) ? opts.name : "sid";
+    this.store = isObject(opts.store) ? opts.store : new MemoryStore();
+    this.secret = isString(opts.secret) ? opts.secret : "sessions";
+    this.generateID = isFunction(opts.generateID) ? opts.generateID : uid;
 }
 
 Sessions.prototype.middleware = function(req, res, next) {
@@ -60,17 +62,26 @@ Sessions.prototype.middleware = function(req, res, next) {
 };
 
 function sign(val, secret) {
-    if (typeof(val) !== "string") throw new TypeError("cookie required");
-    if (typeof(secret) !== "string") throw new TypeError("secret required");
+    if (!isString(val)) {
+        throw new TypeError("cookie required");
+    }
+    if (!isString(secret)) {
+        throw new TypeError("secret required");
+    }
 
-    return val + "." + crypto.createHmac("sha256", secret).update(val).digest("base64").replace(/\=+$/, "");
+    return val + "." + crypto.createHmac("sha256", secret).update(val).digest("base64").replace(sign.reReplacer, "");
 }
+sign.reReplacer = /\=+$/;
 
 function unsign(val, secret) {
     var str, mac;
 
-    if (typeof(val) !== "string") throw new TypeError("cookie required");
-    if (typeof(secret) !== "string") throw new TypeError("secret required");
+    if (!isString(val)) {
+        throw new TypeError("cookie required");
+    }
+    if (!isString(secret)) {
+        throw new TypeError("secret required");
+    }
 
     str = val.slice(0, val.lastIndexOf("."));
     mac = sign(str, secret);
@@ -79,7 +90,6 @@ function unsign(val, secret) {
 }
 
 function sha1(str) {
-
     return crypto.createHash("sha1").update(str).digest("hex");
 }
 
@@ -88,7 +98,9 @@ var UID_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 function uid(length) {
     var str = "";
     length || (length = 32);
-    while (length--) str += UID_CHARS[(Math.random() * 62) | 0];
+    while (length--) {
+        str += UID_CHARS[(Math.random() * 62) | 0];
+    }
     return str;
 }
 

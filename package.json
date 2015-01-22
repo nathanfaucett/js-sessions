@@ -20,9 +20,10 @@
     "grunt-jsbeautifier": ""
   },
   "dependencies": {
-    "type": "nathanfaucett/type",
+    "is_object": "nathanfaucett/is_object",
+    "is_string": "nathanfaucett/is_string",
+    "is_function": "nathanfaucett/is_function",
     "context": "nathanfaucett/context",
     "http_error": "nathanfaucett/http_error"
   }
 }
-

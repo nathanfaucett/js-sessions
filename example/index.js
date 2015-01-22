@@ -3,7 +3,7 @@ var Session = require("../src/index"),
     layers = require("layers"),
     context = require("context"),
 
-    router = new layers.Router(),
+    router = layers.Router.create(),
     server = new require("http").Server(function(req, res) {
 
         context.init(req, res);
