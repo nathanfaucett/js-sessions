@@ -1,14 +1,17 @@
-var Session = require("../src/index"),
+var http = require("http"),
 
     layers = require("layers"),
-    context = require("context"),
+    ri = require("ri"),
 
-    router = layers.Router.create(),
-    server = new require("http").Server(function(req, res) {
+    Session = require("..");
 
-        context.init(req, res);
+
+var router = layers.Router.create(),
+    server = new http.Server(function(req, res) {
+        ri.init(req, res);
         router.handler(req, res);
     });
+
 
 router.use(
     new Session({
@@ -18,7 +21,6 @@ router.use(
 
 router.route("/sign_in")
     .get(function(req, res, next) {
-
         req.session.signed_in = true;
         res.redirect("/");
         next();
@@ -26,7 +28,6 @@ router.route("/sign_in")
 
 router.route("/sign_out")
     .get(function(req, res, next) {
-
         req.session.signed_in = false;
         res.redirect("/");
         next();

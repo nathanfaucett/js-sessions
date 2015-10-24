@@ -1,11 +1,9 @@
 var isString = require("is_string"),
     isObject = require("is_object"),
     isFunction = require("is_function"),
-    context = require("context"),
-    crypto = require('crypto');
-
-
-var MemoryStore = require("./memory_store");
+    Cookie = require("cookie"),
+    crypto = require('crypto'),
+    MemoryStore = require("./MemoryStore");
 
 
 function Sessions(opts) {
@@ -32,7 +30,7 @@ Sessions.prototype.middleware = function(req, res, next) {
         sessionId = this.generateID();
         value = "s:" + sign(sessionId, this.secret);
 
-        cookie = new context.Cookie(this.name, value);
+        cookie = new Cookie(this.name, value);
         res.setCookie(cookie);
     }
 
