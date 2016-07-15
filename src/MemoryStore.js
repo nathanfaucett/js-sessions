@@ -1,5 +1,4 @@
 function MemoryStore() {
-
     this.database = {};
 }
 
@@ -23,7 +22,6 @@ MemoryStore.prototype.set = function(id, json, callback) {
     var database = this.database;
 
     process.nextTick(function() {
-
         database[id] = JSON.stringify(json);
         callback(null);
     });
@@ -35,7 +33,6 @@ MemoryStore.prototype.destroy = function(id, callback) {
     var database = this.database;
 
     process.nextTick(function() {
-
         delete database[id];
         callback(null);
     });

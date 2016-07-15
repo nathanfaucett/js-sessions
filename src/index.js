@@ -1,7 +1,7 @@
-var isString = require("is_string"),
-    isObject = require("is_object"),
-    isFunction = require("is_function"),
-    Cookie = require("cookie"),
+var isString = require("@nathanfaucett/is_string"),
+    isObject = require("@nathanfaucett/is_object"),
+    isFunction = require("@nathanfaucett/is_function"),
+    Cookie = require("@nathanfaucett/cookie"),
     crypto = require('crypto'),
     MemoryStore = require("./MemoryStore");
 
@@ -34,10 +34,10 @@ Sessions.prototype.middleware = function(req, res, next) {
         res.setCookie(cookie);
     }
 
-    store.get(sessionId, function(err, session) {
+    store.get(sessionId, function(error, session) {
         var nativeEnd = res.end;
 
-        if (err) {
+        if (error) {
             session = {
                 cookie: cookie
             };
@@ -46,9 +46,9 @@ Sessions.prototype.middleware = function(req, res, next) {
         req.session = session;
 
         res.end = function(data, encoding) {
-            store.set(sessionId, session, function(err) {
-                if (err) {
-                    throw err;
+            store.set(sessionId, session, function(error) {
+                if (error) {
+                    throw error;
                 }
 
                 nativeEnd.call(res, data, encoding);

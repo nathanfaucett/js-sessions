@@ -1,8 +1,8 @@
 {
-  "name": "test",
+  "name": "@nathanfaucett/test",
   "version": "0.0.1",
   "dependencies": {
-    "layers": "git://github.com/nathanfaucett/layers.git",
-    "ri": "git://github.com/nathanfaucett/ri.git"
+    "@nathanfaucett/layers": "^0.0.1",
+    "@nathanfaucett/ri": "^0.0.1"
   }
 }

@@ -1,7 +1,7 @@
 var http = require("http"),
 
-    layers = require("layers"),
-    ri = require("ri"),
+    layers = require("@nathanfaucett/layers"),
+    ri = require("@nathanfaucett/ri"),
 
     Session = require("..");
 
