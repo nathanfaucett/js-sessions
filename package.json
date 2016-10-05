@@ -1,6 +1,6 @@
 {
   "name": "@nathanfaucett/sessions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "sessions middleware",
   "repository": {
     "type": "git",
@@ -24,6 +24,6 @@
     "@nathanfaucett/is_string": "^0.0.1",
     "@nathanfaucett/is_function": "^0.0.1",
     "@nathanfaucett/cookie": "^0.0.1",
-    "@nathanfaucett/http_error": "^0.0.1"
+    "@nathanfaucett/http_error": "^0.0.2"
   }
 }
